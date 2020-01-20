@@ -16,7 +16,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:ellipsizeText="Altro"
+        app:ellipsizeText="View More"
         app:duration="500"
         app:visibleLines="3"
         app:isExpanded="false"/>

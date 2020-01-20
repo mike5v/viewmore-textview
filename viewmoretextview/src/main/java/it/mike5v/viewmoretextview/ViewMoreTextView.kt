@@ -110,7 +110,7 @@ class ViewMoreTextView @JvmOverloads constructor(
             SpannableStringBuilder(
                 visibleText().substring(
                     0,
-                    visibleText().length - ellipsizeText?.length!!
+                    visibleText().length - (ellipsizeText?.length!! + DEFAULT_ELLIPSIZED_TEXT.length)
                 )
             )
                 .append(DEFAULT_ELLIPSIZED_TEXT)
