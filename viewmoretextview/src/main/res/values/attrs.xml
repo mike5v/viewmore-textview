@@ -5,5 +5,6 @@
         <attr name="isExpanded" format="boolean" />
         <attr name="duration" format="integer" />
         <attr name="foregroundColor" format="color" />
+        <attr name="ellipsizeText" format="string" />
     </declare-styleable>
 </resources>

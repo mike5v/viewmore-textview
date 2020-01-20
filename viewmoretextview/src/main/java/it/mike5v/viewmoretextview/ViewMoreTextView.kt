@@ -27,6 +27,7 @@ class ViewMoreTextView @JvmOverloads constructor(
     companion object {
         const val ANIMATION_PROPERTY_MAX_HEIGHT = "maxHeight"
         const val ANIMATION_PROPERTY_ALPHA = "alpha"
+        const val DEFAULT_ELLIPSIZE_TEXT ="..."
         const val MAX_VALUE_ALPHA = 255
         const val MIN_VALUE_ALPHA = 0
     }
@@ -36,7 +37,7 @@ class ViewMoreTextView @JvmOverloads constructor(
     private var animationDuration: Int? = null
     private var foregroundColor: Int? = null
 
-    private var ellipsizeText: String? = "...Leggi di più"
+    private var ellipsizeText: String? = DEFAULT_ELLIPSIZE_TEXT
     private var initialValue: String? = null
 
     init {
@@ -44,8 +45,8 @@ class ViewMoreTextView @JvmOverloads constructor(
         visibleLines = attributes?.getInt(R.styleable.ViewMoreTextView_visibleLines, 0)
         isExpanded = attributes?.getBoolean(R.styleable.ViewMoreTextView_isExpanded, false)
         animationDuration = attributes?.getInt(R.styleable.ViewMoreTextView_duration, 1000)
-        foregroundColor =
-            attributes?.getColor(R.styleable.ViewMoreTextView_foregroundColor, Color.TRANSPARENT)
+        foregroundColor = attributes?.getColor(R.styleable.ViewMoreTextView_foregroundColor, Color.TRANSPARENT)
+        ellipsizeText = attributes?.getString(R.styleable.ViewMoreTextView_ellipsizeText)
         attributes?.recycle()
 
         if (visibleLines == 0) {
