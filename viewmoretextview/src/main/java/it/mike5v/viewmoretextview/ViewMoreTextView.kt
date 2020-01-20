@@ -36,7 +36,6 @@ class ViewMoreTextView @JvmOverloads constructor(
     private var isExpanded: Boolean? = null
     private var animationDuration: Int? = null
     private var foregroundColor: Int? = null
-
     private var ellipsizeText: String? = DEFAULT_ELLIPSIZE_TEXT
     private var initialValue: String? = null
 
