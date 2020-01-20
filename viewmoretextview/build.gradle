@@ -6,7 +6,7 @@ apply plugin: 'com.jfrog.bintray'
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'viewmore-textView'
+    bintrayName = 'viewmore-textview'
 
     publishedGroupId = 'it.mike5v'
     libraryName = 'ViewMore TextView'
