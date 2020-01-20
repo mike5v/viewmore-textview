@@ -53,9 +53,6 @@ class ViewMoreTextView @JvmOverloads constructor(
         if (visibleLines == 0)
             throw IllegalStateException("You must set visibleLines > 0")
 
-        if (ellipsizeText == null)
-            throw IllegalStateException("You must set ellipsized text")
-
         setMaxLines(isExpanded!!)
         setForeground(isExpanded!!)
     }
@@ -110,11 +107,11 @@ class ViewMoreTextView @JvmOverloads constructor(
             SpannableStringBuilder(
                 visibleText().substring(
                     0,
-                    visibleText().length - (ellipsizeText?.length!! + DEFAULT_ELLIPSIZED_TEXT.length)
+                    visibleText().length - (ellipsizeText.orEmpty().length!! + DEFAULT_ELLIPSIZED_TEXT.length)
                 )
             )
                 .append(DEFAULT_ELLIPSIZED_TEXT)
-                .append(ellipsizeText?.span())
+                .append(ellipsizeText.orEmpty().span())
 
         }
     }
