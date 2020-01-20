@@ -27,7 +27,7 @@ class ViewMoreTextView @JvmOverloads constructor(
     companion object {
         const val ANIMATION_PROPERTY_MAX_HEIGHT = "maxHeight"
         const val ANIMATION_PROPERTY_ALPHA = "alpha"
-        const val DEFAULT_ELLIPSIZE_TEXT ="..."
+        const val DEFAULT_ELLIPSIZED_TEXT = "..."
         const val MAX_VALUE_ALPHA = 255
         const val MIN_VALUE_ALPHA = 0
     }
@@ -36,8 +36,9 @@ class ViewMoreTextView @JvmOverloads constructor(
     private var isExpanded: Boolean? = null
     private var animationDuration: Int? = null
     private var foregroundColor: Int? = null
-    private var ellipsizeText: String? = DEFAULT_ELLIPSIZE_TEXT
+    private var ellipsizeText: String? = null
     private var initialValue: String? = null
+    private var isUnderlined: Boolean? = null
 
     init {
         val attributes = context?.obtainStyledAttributes(attrs, R.styleable.ViewMoreTextView)
@@ -46,11 +47,14 @@ class ViewMoreTextView @JvmOverloads constructor(
         animationDuration = attributes?.getInt(R.styleable.ViewMoreTextView_duration, 1000)
         foregroundColor = attributes?.getColor(R.styleable.ViewMoreTextView_foregroundColor, Color.TRANSPARENT)
         ellipsizeText = attributes?.getString(R.styleable.ViewMoreTextView_ellipsizeText)
+        isUnderlined = attributes?.getBoolean(R.styleable.ViewMoreTextView_isUnderlined, false)
         attributes?.recycle()
 
-        if (visibleLines == 0) {
+        if (visibleLines == 0)
             throw IllegalStateException("You must set visibleLines > 0")
-        }
+
+        if (ellipsizeText == null)
+            throw IllegalStateException("You must set ellipsized text")
 
         setMaxLines(isExpanded!!)
         setForeground(isExpanded!!)
@@ -66,6 +70,10 @@ class ViewMoreTextView @JvmOverloads constructor(
     }
 
     fun toggle() {
+        if (visibleText().isAllTextVisible()) {
+            return
+        }
+
         isExpanded = !isExpanded!!
 
         if (isExpanded!!)
@@ -84,24 +92,19 @@ class ViewMoreTextView @JvmOverloads constructor(
             start()
 
             addListener(object : Animator.AnimatorListener {
-
-                override fun onAnimationRepeat(animation: Animator?) {}
-
                 override fun onAnimationEnd(animation: Animator?) {
                     if (!isExpanded!!)
                         setEllipsizedText(isExpanded!!)
                 }
-
+                override fun onAnimationRepeat(animation: Animator?) {}
                 override fun onAnimationCancel(animation: Animator?) {}
-
                 override fun onAnimationStart(animation: Animator?) {}
-
             })
         }
     }
 
     private fun setEllipsizedText(isExpanded: Boolean) {
-        text = if (isExpanded) {
+        text = if (isExpanded || visibleText().isAllTextVisible()) {
             initialValue
         } else {
             SpannableStringBuilder(
@@ -109,7 +112,9 @@ class ViewMoreTextView @JvmOverloads constructor(
                     0,
                     visibleText().length - ellipsizeText?.length!!
                 )
-            ).append(ellipsizeText?.span())
+            )
+                .append(DEFAULT_ELLIPSIZED_TEXT)
+                .append(ellipsizeText?.span())
 
         }
     }
@@ -120,22 +125,6 @@ class ViewMoreTextView @JvmOverloads constructor(
 
         return initialValue?.substring(start, end)!!
     }
-
-    private fun String.span(): SpannableString =
-        SpannableString(this).apply {
-            setSpan(
-                ForegroundColorSpan(Color.BLUE),
-                0,
-                this.length,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-            setSpan(
-                UnderlineSpan(),
-                0,
-                this.length,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-        }
 
     private fun setMaxLines(isExpanded: Boolean) {
         maxLines = if (!isExpanded) {
@@ -175,5 +164,24 @@ class ViewMoreTextView @JvmOverloads constructor(
             )
         }
     }
+
+    private fun String.isAllTextVisible(): Boolean = this == text
+
+    private fun String.span(): SpannableString =
+        SpannableString(this).apply {
+            setSpan(
+                ForegroundColorSpan(Color.BLUE),
+                0,
+                this.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            if (isUnderlined!!)
+                setSpan(
+                    UnderlineSpan(),
+                    0,
+                    this.length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+        }
 
 }
