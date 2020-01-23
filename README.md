@@ -1,6 +1,6 @@
 # ViewMore TextView
 
-ViewMore TextView allows you to use a TextView by hiding the content of the text by a number of established lines and to display all the content expanding the TextView by a collapsing/expanding animation. It's possibile use an ellipses text or a foregorund color gradient or both to hide the content. 🚀
+ViewMore TextView allows you to use a TextView by hiding the content of the text by a number of established lines and to display all the content expanding the TextView by a collapsing/expanding animation. It's possibile use an ellipses text or a foreground color gradient or both to hide the content. 🚀
 
 Here some examples:
 
