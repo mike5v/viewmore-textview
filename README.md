@@ -16,7 +16,7 @@ implemantation "it.mike5v:viewmore-textview:$latest_release"
 # Usage
 
 * visibleLines -> number of visible lines
-* isExpanded -> state of tesxtview (default is false)
+* isExpanded -> state of textview (default is false)
 * animationDuration -> duration of the animation in ms
 * foregroundColor -> color of the foreground gradient layer (default is Transparent)
 * ellipsizeText -> text to use instead of default ellipses
