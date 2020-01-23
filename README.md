@@ -38,3 +38,9 @@ implemantation "it.mike5v:viewmore-textview:$latest_release"
         app:visibleLines="3"
         app:isExpanded="false"/>
 ```
+and
+```
+viewMore.setOnClickListener {
+    viewMore.toggle()
+}
+```
