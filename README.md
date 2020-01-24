@@ -1,4 +1,4 @@
-# ViewMore TextView
+# ViewMore TextView [ ![Download](https://api.bintray.com/packages/michele5valle/maven/viewmore-textview/images/download.svg) ](https://bintray.com/michele5valle/maven/viewmore-textview/_latestVersion)
 
 ViewMore TextView allows you to use a TextView by hiding the content of the text by a number of established lines and to display all the content expanding the TextView by a collapsing/expanding animation. It's possibile use an ellipses text or a foreground color gradient or both to hide the content. 🚀
 
@@ -10,7 +10,7 @@ Here some examples:
 
 In your Gradle dependencies add:
 ```
-implemantation "it.mike5v:viewmore-textview:$latest_release"
+implementation "it.mike5v:viewmore-textview:$latest_release"
 ```
 
 # Usage
