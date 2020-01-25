@@ -60,7 +60,7 @@ class ViewMoreTextView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        if (initialValue.isNullOrBlank()) {
+        if (initialValue == null) {
             initialValue = text.toString()
 
             setEllipsizedText(isExpanded!!)
