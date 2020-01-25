@@ -7,5 +7,6 @@
         <attr name="foregroundColor" format="color" />
         <attr name="ellipsizeText" format="string" />
         <attr name="isUnderlined" format="boolean" />
+        <attr name="ellipsizeTextColor" format="color" />
     </declare-styleable>
 </resources>

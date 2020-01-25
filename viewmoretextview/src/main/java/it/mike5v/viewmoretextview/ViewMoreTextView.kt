@@ -39,6 +39,7 @@ class ViewMoreTextView @JvmOverloads constructor(
     private var ellipsizeText: String? = null
     private var initialValue: String? = null
     private var isUnderlined: Boolean? = null
+    private var ellipsizeTextColor: Int? = null
 
     init {
         val attributes = context?.obtainStyledAttributes(attrs, R.styleable.ViewMoreTextView)
@@ -48,12 +49,12 @@ class ViewMoreTextView @JvmOverloads constructor(
         foregroundColor = attributes?.getColor(R.styleable.ViewMoreTextView_foregroundColor, Color.TRANSPARENT)
         ellipsizeText = attributes?.getString(R.styleable.ViewMoreTextView_ellipsizeText)
         isUnderlined = attributes?.getBoolean(R.styleable.ViewMoreTextView_isUnderlined, false)
+        ellipsizeTextColor = attributes?.getColor(R.styleable.ViewMoreTextView_ellipsizeTextColor, Color.BLUE)
         attributes?.recycle()
 
-        if (visibleLines == 0)
-            throw IllegalStateException("You must set visibleLines > 0")
+        if (visibleLines != 0)
+            setMaxLines(isExpanded!!)
 
-        setMaxLines(isExpanded!!)
         setForeground(isExpanded!!)
     }
 
@@ -100,6 +101,41 @@ class ViewMoreTextView @JvmOverloads constructor(
         }
     }
 
+    fun setVisibleLines(visibleLines: Int): ViewMoreTextView {
+        this.visibleLines = visibleLines
+        return this
+    }
+
+    fun setIsExpanded(isExpanded: Boolean): ViewMoreTextView {
+        this.isExpanded = isExpanded
+        return this
+    }
+
+    fun setAnimationDuration(animationDuration: Int): ViewMoreTextView {
+        this.animationDuration = animationDuration
+        return this
+    }
+
+    fun setIsUnderlined(isUnderlined: Boolean): ViewMoreTextView {
+        this.isUnderlined = isUnderlined
+        return this
+    }
+
+    fun setEllipsizedText(ellipsizeText: String): ViewMoreTextView {
+        this.ellipsizeText = ellipsizeText
+        return this
+    }
+
+    fun setEllipsizedTextColor(ellipsizeTextColor: Int): ViewMoreTextView {
+        this.ellipsizeTextColor = ellipsizeTextColor
+        return this
+    }
+
+    fun setForegroundColor(foregroundColor: Int): ViewMoreTextView {
+        this.foregroundColor = foregroundColor
+        return this
+    }
+
     private fun setEllipsizedText(isExpanded: Boolean) {
         text = if (isExpanded || visibleText().isAllTextVisible()) {
             initialValue
@@ -107,7 +143,7 @@ class ViewMoreTextView @JvmOverloads constructor(
             SpannableStringBuilder(
                 visibleText().substring(
                     0,
-                    visibleText().length - (ellipsizeText.orEmpty().length!! + DEFAULT_ELLIPSIZED_TEXT.length)
+                    visibleText().length - (ellipsizeText.orEmpty().length + DEFAULT_ELLIPSIZED_TEXT.length)
                 )
             )
                 .append(DEFAULT_ELLIPSIZED_TEXT)
@@ -167,7 +203,7 @@ class ViewMoreTextView @JvmOverloads constructor(
     private fun String.span(): SpannableString =
         SpannableString(this).apply {
             setSpan(
-                ForegroundColorSpan(Color.BLUE),
+                ForegroundColorSpan(ellipsizeTextColor!!),
                 0,
                 this.length,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
