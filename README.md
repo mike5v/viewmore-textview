@@ -44,3 +44,12 @@ viewMore.setOnClickListener {
     viewMore.toggle()
 }
 ```
+or programmatically
+```
+viewMore
+    .setAnimationDuration(500)
+    .setEllipsizedText("View More")
+    .setVisibleLines(3)
+    .setIsExpanded(false)
+    .setEllipsizedTextColor(ContextCompat.getColor(this, R.color.colorAccent))
+```
