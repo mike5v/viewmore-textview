@@ -46,12 +46,10 @@ class ViewMoreTextView @JvmOverloads constructor(
         visibleLines = attributes?.getInt(R.styleable.ViewMoreTextView_visibleLines, 0)
         isExpanded = attributes?.getBoolean(R.styleable.ViewMoreTextView_isExpanded, false)
         animationDuration = attributes?.getInt(R.styleable.ViewMoreTextView_duration, 1000)
-        foregroundColor =
-            attributes?.getColor(R.styleable.ViewMoreTextView_foregroundColor, Color.TRANSPARENT)
+        foregroundColor = attributes?.getColor(R.styleable.ViewMoreTextView_foregroundColor, Color.TRANSPARENT)
         ellipsizeText = attributes?.getString(R.styleable.ViewMoreTextView_ellipsizeText)
         isUnderlined = attributes?.getBoolean(R.styleable.ViewMoreTextView_isUnderlined, false)
-        ellipsizeTextColor =
-            attributes?.getColor(R.styleable.ViewMoreTextView_ellipsizeTextColor, Color.BLUE)
+        ellipsizeTextColor = attributes?.getColor(R.styleable.ViewMoreTextView_ellipsizeTextColor, Color.BLUE)
         attributes?.recycle()
 
         if (visibleLines != 0)
@@ -106,6 +104,7 @@ class ViewMoreTextView @JvmOverloads constructor(
 
     fun setVisibleLines(visibleLines: Int): ViewMoreTextView {
         this.visibleLines = visibleLines
+        setMaxLines(isExpanded!!)
         return this
     }
 
@@ -136,6 +135,7 @@ class ViewMoreTextView @JvmOverloads constructor(
 
     fun setForegroundColor(foregroundColor: Int): ViewMoreTextView {
         this.foregroundColor = foregroundColor
+        setForeground(isExpanded!!)
         return this
     }
 
