@@ -137,6 +137,9 @@ class ViewMoreTextView @JvmOverloads constructor(
     }
 
     private fun setEllipsizedText(isExpanded: Boolean) {
+        if (initialValue?.isBlank()!!)
+            return
+
         text = if (isExpanded || visibleText().isAllTextVisible()) {
             initialValue
         } else {
