@@ -38,12 +38,6 @@ implementation "it.mike5v:viewmore-textview:$latest_release"
         app:visibleLines="3"
         app:isExpanded="false"/>
 ```
-and
-```
-viewMore.setOnClickListener {
-    viewMore.toggle()
-}
-```
 or programmatically
 ```
 viewMore
@@ -52,4 +46,10 @@ viewMore
     .setVisibleLines(3)
     .setIsExpanded(false)
     .setEllipsizedTextColor(ContextCompat.getColor(this, R.color.colorAccent))
+```
+and
+```
+viewMore.setOnClickListener {
+    viewMore.toggle()
+}
 ```
