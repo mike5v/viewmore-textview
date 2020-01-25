@@ -46,10 +46,12 @@ class ViewMoreTextView @JvmOverloads constructor(
         visibleLines = attributes?.getInt(R.styleable.ViewMoreTextView_visibleLines, 0)
         isExpanded = attributes?.getBoolean(R.styleable.ViewMoreTextView_isExpanded, false)
         animationDuration = attributes?.getInt(R.styleable.ViewMoreTextView_duration, 1000)
-        foregroundColor = attributes?.getColor(R.styleable.ViewMoreTextView_foregroundColor, Color.TRANSPARENT)
+        foregroundColor =
+            attributes?.getColor(R.styleable.ViewMoreTextView_foregroundColor, Color.TRANSPARENT)
         ellipsizeText = attributes?.getString(R.styleable.ViewMoreTextView_ellipsizeText)
         isUnderlined = attributes?.getBoolean(R.styleable.ViewMoreTextView_isUnderlined, false)
-        ellipsizeTextColor = attributes?.getColor(R.styleable.ViewMoreTextView_ellipsizeTextColor, Color.BLUE)
+        ellipsizeTextColor =
+            attributes?.getColor(R.styleable.ViewMoreTextView_ellipsizeTextColor, Color.BLUE)
         attributes?.recycle()
 
         if (visibleLines != 0)
@@ -94,6 +96,7 @@ class ViewMoreTextView @JvmOverloads constructor(
                     if (!isExpanded!!)
                         setEllipsizedText(isExpanded!!)
                 }
+
                 override fun onAnimationRepeat(animation: Animator?) {}
                 override fun onAnimationCancel(animation: Animator?) {}
                 override fun onAnimationStart(animation: Animator?) {}
@@ -156,10 +159,14 @@ class ViewMoreTextView @JvmOverloads constructor(
     }
 
     private fun visibleText(): String {
-        val start = layout.getLineStart(0)
-        val end = layout.getLineEnd(visibleLines!! - 1)
+        var end = 0
 
-        return initialValue?.substring(start, end)!!
+        for (i in 0 until visibleLines!!) {
+            if (layout.getLineEnd(i) != 0)
+                end = layout.getLineEnd(i)
+        }
+
+        return initialValue?.substring(0, end)!!
     }
 
     private fun setMaxLines(isExpanded: Boolean) {
