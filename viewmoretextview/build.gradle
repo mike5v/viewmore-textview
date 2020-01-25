@@ -17,7 +17,7 @@ ext {
     siteUrl = 'https://github.com/mike5v/viewmore-textview'
     gitUrl = 'https://github.com/mike5v/viewmore-textview.git'
 
-    libraryVersion = '1.1.1'
+    libraryVersion = '1.1.2'
 
     developerId = 'michele5valle'
     developerName = 'Michele Quintavalle'
