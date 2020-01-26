@@ -20,6 +20,7 @@ implementation "it.mike5v:viewmore-textview:$latest_release"
 * animationDuration -> duration of the animation in ms
 * foregroundColor -> color of the foreground gradient layer (default is Transparent)
 * ellipsizeText -> text to use instead of default ellipses
+* ellipsizeTextColor -> color of ellipsize text
 * isUnderlined -> underline the ellipsize text
 
 ```
