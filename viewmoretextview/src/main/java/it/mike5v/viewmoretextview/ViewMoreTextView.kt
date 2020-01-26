@@ -41,6 +41,8 @@ class ViewMoreTextView @JvmOverloads constructor(
     private var isUnderlined: Boolean? = null
     private var ellipsizeTextColor: Int? = null
 
+    private val visibleText by lazy { visibleText() }
+
     init {
         val attributes = context?.obtainStyledAttributes(attrs, R.styleable.ViewMoreTextView)
         visibleLines = attributes?.getInt(R.styleable.ViewMoreTextView_visibleLines, 0)
@@ -68,7 +70,7 @@ class ViewMoreTextView @JvmOverloads constructor(
     }
 
     fun toggle() {
-        if (visibleText().isAllTextVisible()) {
+        if (visibleText.isAllTextVisible()) {
             return
         }
 
@@ -143,13 +145,13 @@ class ViewMoreTextView @JvmOverloads constructor(
         if (initialValue?.isBlank()!!)
             return
 
-        text = if (isExpanded || visibleText().isAllTextVisible()) {
+        text = if (isExpanded || visibleText.isAllTextVisible()) {
             initialValue
         } else {
             SpannableStringBuilder(
-                visibleText().substring(
+                visibleText.substring(
                     0,
-                    visibleText().length - (ellipsizeText.orEmpty().length + DEFAULT_ELLIPSIZED_TEXT.length)
+                    visibleText.length - (ellipsizeText.orEmpty().length + DEFAULT_ELLIPSIZED_TEXT.length)
                 )
             )
                 .append(DEFAULT_ELLIPSIZED_TEXT)
